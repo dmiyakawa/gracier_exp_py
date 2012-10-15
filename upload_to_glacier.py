@@ -1,10 +1,13 @@
 #!/usr/bin/python
 
-import aws_consts
 import boto.glacier
 import boto.glacier.layer2
 import datetime
 import sys
+
+# To include 'aws_consts', which should not be part of the project.
+sys.path.append('../')
+import aws_consts
 
 layer2 = boto.glacier.layer2.Layer2(
     aws_access_key_id = aws_consts.ACCESS_KEY_ID,
@@ -31,6 +34,7 @@ def create_vault(vault_basename):
     return layer2.create_vault(vault_name)
 
 if __name__ == '__main__':
+    sys.exit(0)
     if len(sys.argv) < 2:
         print >>sys.stderr, 'usage: %s file_name' % sys.argv[0]
         sys.exit(1)
